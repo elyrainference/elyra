@@ -37,3 +37,20 @@ jobs:
       - name: no key material in the repo
         run: |
           if git ls-files | grep -E '(^|/)(\.elyra[^/]*|wallet\.json|identity\.json|state\.json|\.env(\..+)?|.*_key|.*\.pem|.*\.tgz|.*\.bundle)(/|$)'; then echo "secret file tracked"; exit 1; fi
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t elyra-ci .
+      - name: image has no tests and runs as a non-root user
+        run: |
+          test "$(docker run --rm --entrypoint id elyra-ci -u)" != "0"
+          docker run --rm --entrypoint sh elyra-ci -c 'test ! -d router/test && test -f contracts/artifacts/ElyraEscrow.json'
+      - name: container becomes healthy and the loopback API answers (host networking)
+        run: |
+          docker run -d --name elyra-ci --network host -e ELYRA_PASSPHRASE=ci-only-passphrase elyra-ci --no-demo
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:8545/healthz >/dev/null && break; sleep 2; done
+          curl -fsS http://127.0.0.1:8545/healthz
+          curl -fsS http://127.0.0.1:8545/api/status | grep -q '"version"'
+          for i in $(seq 1 20); do [ "$(docker inspect -f '{{.State.Health.Status}}' elyra-ci)" = healthy ] && exit 0; sleep 3; done
+          docker logs elyra-ci; exit 1

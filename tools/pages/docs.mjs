@@ -19,7 +19,8 @@ export const NAV = [
     { slug: "token", src: "docs/TOKEN.md", title: "$ELYRA token", desc: "Contract address and what the token is and is not used for." },
     { slug: "provider", src: "docs/PROVIDER.md", title: "Sell capacity", desc: "Offer a model to the network and get paid per token." },
     { slug: "remote-admin", src: "docs/REMOTE-ADMIN.md", title: "Remote access", desc: "Put your node online behind a login, with an optional public try page." },
-      { slug: "operations", src: "docs/OPERATIONS.md", title: "Run it in production", desc: "Hardening, monitoring, backups, upgrades and what to do when a model machine goes away." },
+      { slug: "docker", src: "docs/DOCKER.md", title: "Run in Docker", desc: "Run the node in a container on Linux, next to your own Ollama." },
+    { slug: "operations", src: "docs/OPERATIONS.md", title: "Run it in production", desc: "Hardening, monitoring, backups, upgrades and what to do when a model machine goes away." },
   ] },
   { group: "Reference", items: [
     { slug: "configuration", src: "docs/CONFIGURATION.md", title: "Configuration", desc: "Every command-line flag and environment variable." },

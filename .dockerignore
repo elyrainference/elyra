@@ -1,0 +1,14 @@
+.git
+.github
+node_modules
+**/node_modules
+.elyra*
+.env*
+*.env
+dist
+docs
+router/test
+contracts/cache
+contracts/contracts
+contracts/test
+*.md

@@ -125,6 +125,7 @@ Without a real model attached, the router shows simulated peers (labelled `SIM`)
 | [Provider guide](docs/PROVIDER.md) | Sell capacity (multi-source, NAT relay), payment flow, risk controls, TEE limits |
 | [Control API](docs/API.md) | `/api/*` reference |
 | [Remote admin](docs/REMOTE-ADMIN.md) | Opt-in: the real panel on your own hostname behind a login (token or wallet), plus `/pub/*` |
+| [Run in Docker](docs/DOCKER.md) | `docker compose up` on Linux, next to your own Ollama |
 | [Run it in production](docs/OPERATIONS.md) | Systemd sandboxing, monitoring, daily backups, non-disruptive restore drill |
 | [Mainnet runbook](docs/MAINNET.md), [Registry](docs/REGISTRY.md), [Auth](docs/AUTH.md) | Capped mainnet beta, on-chain discovery, wallet sign-in threat model |
 | [Private inference (TEE)](docs/TEE.md) | Confidential Space attestation verifier, trust list, limits, milestone M1 |

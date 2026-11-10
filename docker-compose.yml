@@ -1,0 +1,23 @@
+# Elyra node next to your own Ollama (Linux). Host networking keeps the router's rule that /api, /v1 and the
+# panel are reachable only from the machine itself. Run: docker compose up -d --build   then open http://localhost:8545/app/
+#
+# Put secrets in a file named .env next to this one (it is git-ignored): ELYRA_PASSPHRASE=... (encrypts the wallet at rest)
+services:
+  elyra:
+    build: .
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - elyra-data:/data
+    environment:
+      ELYRA_PASSPHRASE: ${ELYRA_PASSPHRASE:-}
+      ELYRA_UPSTREAM_URL: ${ELYRA_UPSTREAM_URL:-http://127.0.0.1:11434/v1}   # Ollama on the host
+      ELYRA_UPSTREAM_NAME: ${ELYRA_UPSTREAM_NAME:-local-model}
+      # To sell capacity, set these in .env (see docs/PROVIDER.md): ELYRA_PROVIDE=1, ELYRA_PROVIDE_PRICE, ELYRA_PAYOUT, ELYRA_PUBLIC_URL or ELYRA_RELAY_URL
+      ELYRA_PROVIDE: ${ELYRA_PROVIDE:-}
+      ELYRA_PROVIDE_PRICE: ${ELYRA_PROVIDE_PRICE:-}
+      ELYRA_PAYOUT: ${ELYRA_PAYOUT:-}
+      ELYRA_PUBLIC_URL: ${ELYRA_PUBLIC_URL:-}
+      ELYRA_RELAY_URL: ${ELYRA_RELAY_URL:-}
+volumes:
+  elyra-data:

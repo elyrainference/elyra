@@ -8,7 +8,7 @@ The rendered, searchable version of these pages (grouped navigation, search, on-
 - [How it works](CONCEPTS.md): routing, peers, receipts, vouchers, real versus simulated.
 - [FAQ and troubleshooting](FAQ.md)
 
-**Guides**: [Install](INSTALL.md), [Run a real model (Ollama)](OLLAMA.md), [Use the endpoint](USAGE.md), [Control panel](PANEL.md), [Wallet and USDG](WALLET.md), [$ELYRA token](TOKEN.md), [Sell capacity](PROVIDER.md), [Remote admin](REMOTE-ADMIN.md), [Run it in production](OPERATIONS.md), [Mainnet runbook](MAINNET.md), [Publish the website](DEPLOY-CLOUDFLARE.md)
+**Guides**: [Install](INSTALL.md), [Run a real model (Ollama)](OLLAMA.md), [Use the endpoint](USAGE.md), [Control panel](PANEL.md), [Wallet and USDG](WALLET.md), [$ELYRA token](TOKEN.md), [Sell capacity](PROVIDER.md), [Remote admin](REMOTE-ADMIN.md), [Docker](DOCKER.md), [Run it in production](OPERATIONS.md), [Mainnet runbook](MAINNET.md), [Publish the website](DEPLOY-CLOUDFLARE.md)
 
 **Reference**: [Configuration](CONFIGURATION.md), [Control API](API.md), [Peer protocol](PROTOCOL.md), [Architecture](ARCHITECTURE.md), [Glossary](GLOSSARY.md)
 
