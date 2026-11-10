@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-10: token page, stats, single theme
+- **$ELYRA:** contract address on the app footer and a token page; `docs/TOKEN.md` records what the deployed contract does and does not do (inspection, not an audit). Payments stay in USDG; the token is not in the settlement path.
+- **Stats:** new `#/stats` section in the public app with measured data only. New `GET /pub/stats` returns a 30-day aggregate of this node's own activity (simulated and failed requests are not counted).
+- **App look:** one light theme for the whole public app, no theme toggle; new favicon and social preview; the sign-in page has an icon.
+- **Operations:** a backup was restored into a temporary directory on a spare loopback port and matched the live node's id and wallet address; a wrong passphrase refused to start.
+
 ## 2026-11-07: buyer safety and flow
 - **Daily spend cap:** new setting `spendCapUsdDay` (`PUT /api/settings`, Payments → Daily spend cap; `null` = no cap, `0` blocks every paid route; negative, non-finite or non-numeric values are `400`). A paid route is skipped when the last 24 hours of ledger spend, plus the worst case of requests still in flight, plus this request's worst case (`promptEstimate` / `outCap`, price × 1.05) would pass the cap; free and local routes are never limited, and a skipped paid route fails over to them. If every route is skipped for the cap the answer is `402 spend_cap_reached` with how to raise it. `GET /api/status` has `spendCap: {usdDay, spentUsd}`. Tests: `router/test/spendcap.test.mjs`.
 - **Alerts on Home and Payments:** non-blocking banners derived from live state, each with the one action that fixes it: "No ETH for gas" (faucet link and address copy), "Escrow below $1" (add funds), "You used 80% of today's spend cap" and "Daily spend cap reached" (raise the cap). No new polling.

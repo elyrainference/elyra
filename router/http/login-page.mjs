@@ -24,7 +24,7 @@ button:hover{filter:brightness(1.08)}
 `;
 
 /** `msg` is a short fixed string chosen by the server (never user input). `opts`: which sign-in methods this node offers. */
-export const loginPage = (msg = "", { token = true, wallet = false } = {}) => `<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Sign in · Elyra</title><style>${CSS}</style>
+export const loginPage = (msg = "", { token = true, wallet = false } = {}) => `<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Sign in · Elyra</title><link rel=icon type=image/svg+xml href=/try/favicon.svg><link rel=icon href=/try/favicon.ico sizes=any><style>${CSS}</style>
 <main><div class=brand><i></i>Elyra</div>
 <div class=card><h1>Sign in</h1><p>Control panel of this node.${token && wallet ? " Use your admin wallet or the admin token." : wallet ? " Use your admin wallet." : " Enter the admin token."}</p>${wallet ? `
 <div id=wallet hidden><button type=button class=alt id=wbtn>Sign in with wallet</button><div id=wlist></div><p class=hint>Signing proves you own the address. It sends no transaction and moves no funds.</p></div><noscript><p class=hint>Wallet sign-in needs JavaScript.</p></noscript>${token ? `<div class=or>or</div>` : ""}` : ""}${token ? `
