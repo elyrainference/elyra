@@ -1,0 +1,39 @@
+name: ci
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  node:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: { node: [20, 22] }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "${{ matrix.node }}", cache: npm }
+      - run: npm ci --omit=dev
+      - run: npm run chain:install   # hardhat node for the on-chain integration test
+      - run: cd tools/pages && npm ci   # router/test/docs.test.mjs builds the docs bundle (dev dependency: marked)
+      - run: npm test
+  contracts:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - run: cd contracts && npm ci && npm test
+      - name: committed artifacts and bundles must match the sources
+        run: |
+          cd contracts && npm run build
+          git diff --exit-code -- artifacts || (echo "artifacts are stale: run npm run chain:build and commit" && exit 1)
+          cd ../panel/vendor && sha256sum -c wallet.js.sha256
+          cd ../try && sha256sum -c session.js.sha256
+      - name: docs and landing bundle build cleanly
+        run: cd tools/pages && npm ci && npm run build
+  secrets-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: no key material in the repo
+        run: |
+          if git ls-files | grep -E '(^|/)(\.elyra[^/]*|wallet\.json|identity\.json|state\.json|\.env(\..+)?|.*_key|.*\.pem|.*\.tgz|.*\.bundle)(/|$)'; then echo "secret file tracked"; exit 1; fi

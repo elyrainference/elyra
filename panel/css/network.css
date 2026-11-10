@@ -1,0 +1,40 @@
+/* Network view: topology graph (SVG painted with tokens, so both themes work), tooltip, legend. */
+.graph{position:relative;aspect-ratio:960/540;min-height:380px;border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  background:radial-gradient(circle at 1px 1px,var(--border2) 1px,transparent 0) 0 0/24px 24px,var(--input)}
+.graph svg{width:100%;height:100%;display:block}
+.graph .ringline{fill:none;stroke:var(--accent);stroke-opacity:.28;stroke-dasharray:2 7}
+.graph .ringlbl{font:600 10px var(--font);letter-spacing:.08em;fill:var(--accent-text);opacity:.85}
+.graph .lk{stroke:var(--accent);stroke-width:1}
+.graph .lk.live{stroke-width:1.6}
+.graph .lk.bridge,.graph .lk.community{stroke:var(--sim)}
+.graph .nd{cursor:pointer;transition:opacity .2s}
+.graph .nd:hover .nb{filter:drop-shadow(0 0 6px var(--accent))}
+.graph .nd.sel .nb{stroke-width:3.5}
+.graph .nd .nb{fill:var(--surface);stroke:var(--accent);stroke-width:3}
+.graph .nd.bridge .nb{stroke:var(--faint);stroke-width:1.5}
+.graph .nd.community .nb{fill:var(--sim);fill-opacity:.75;stroke:var(--surface);stroke-width:1.5}
+.graph .nd.community.tee .nb{fill-opacity:1}
+.graph .nd.community.sel .nb{fill-opacity:1}
+.graph .okdot{fill:var(--ok)}
+.graph .nlbl{font:600 11px var(--font);fill:var(--text);pointer-events:none}
+.graph .nlbl.sm{font-weight:400;font-size:10px;fill:var(--muted)}
+.graph .nlbl.you{font-size:12px}
+.graph .pulse{fill:none;stroke:var(--accent);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:nwp 2.4s ease-out infinite}
+@keyframes nwp{from{transform:scale(1);opacity:.8}to{transform:scale(2.6);opacity:0}}
+.graph .orbit{transform-box:fill-box;transform-origin:center;animation:orb 24s linear infinite;fill:none;stroke:var(--accent);stroke-dasharray:3 7}
+@keyframes orb{to{transform:rotate(360deg)}}
+.graph .you-core{fill:var(--accent)}
+.graph .flow{stroke:var(--accent);fill:none;stroke-dasharray:4 8;animation:dash 1.2s linear infinite}
+.graph .flowdot{fill:var(--accent)}
+@keyframes dash{to{stroke-dashoffset:-24}}
+.graphbox{position:relative}
+.nw-tip{position:absolute;z-index:5;pointer-events:none;background:var(--raised);color:var(--text);border:1px solid var(--border2);padding:9px 12px;font-size:12.5px;line-height:1.55;max-width:240px;border-radius:10px;box-shadow:var(--shadow-pop)}
+.nw-tip .mut{color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:14px;font-size:12.5px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px;vertical-align:-1px}
+.lg-you{background:var(--accent)}.lg-live{background:var(--surface);border:3px solid var(--accent)}.lg-bridge{background:var(--surface);border:1.5px solid var(--faint)}.lg-comm{background:var(--sim)}
+.lg-flow{border-radius:2px!important;height:3px!important;background:var(--accent);vertical-align:2px!important;width:16px!important}
+.peer-dot{display:inline-block;margin-right:8px}
+/* phones: the topology scrolls inside its own box instead of widening the page */
+@media(max-width:900px){.graph{aspect-ratio:auto;min-height:0;overflow-x:auto}.graph svg{width:auto;min-width:640px;height:auto;aspect-ratio:960/540}}
+.graph .gl{display:block;width:16px;height:16px;background:var(--text);-webkit-mask:var(--l) center/contain no-repeat;mask:var(--l) center/contain no-repeat}

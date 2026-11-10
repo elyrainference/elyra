@@ -1,0 +1,56 @@
+/* Polish layer shared by every view: in-page tabs, inline help, illustrated empty states, toasts with undo, motion, compact density.
+   Tokens only (base.css). Motion is switched off by the prefers-reduced-motion rule in responsive.css. */
+.pane-off{display:none!important}
+
+/* ---------- tabs ---------- */
+.tabs{display:flex;gap:2px;max-width:100%;overflow-x:auto;border-bottom:1px solid var(--border);scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{position:relative;flex:none;height:40px;padding:0 14px;border:0;background:none;color:var(--muted);font-size:14px;font-weight:550;cursor:pointer;white-space:nowrap;border-radius:6px 6px 0 0;transition:color .12s,background .12s}
+.tab:hover{color:var(--text);background:var(--hover)}
+.tab.on{color:var(--text)}
+.tab.on::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;border-radius:2px;background:var(--grad)}
+.body>.tabs{margin-bottom:-4px}
+
+/* ---------- inline help ---------- */
+.hi{display:inline-grid;place-items:center;width:22px;height:22px;flex:none;border:0;border-radius:50%;background:none;color:var(--faint);cursor:pointer;vertical-align:middle}
+.hi:hover,.hi[aria-expanded=true]{color:var(--accent-text);background:var(--accent-bg)}
+.hi svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- empty states ---------- */
+.empty .ill{display:grid;place-items:center;width:56px;height:56px;margin-bottom:8px;border-radius:16px;color:var(--accent-text);background:linear-gradient(145deg,var(--accent-bg),transparent),var(--raised);border:1px solid var(--accent-bd);box-shadow:0 0 0 6px var(--accent-bg)}
+.empty .ill svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.empty.sm .ill{width:40px;height:40px;border-radius:12px;box-shadow:none}.empty.sm .ill svg{width:20px;height:20px}
+
+/* ---------- page header ---------- */
+.pagehead{padding-bottom:4px}
+.pagehead .act{align-items:center}
+.pagehead h1 .badge{font-size:10.5px}
+
+/* ---------- toasts ---------- */
+.toast{position:fixed;right:20px;bottom:20px;z-index:110;display:flex;flex-direction:column;gap:8px;pointer-events:none;max-width:calc(100vw - 28px)}
+.toast>div{display:flex;align-items:center;gap:8px;background:var(--raised);color:var(--text);padding:10px 8px 10px 16px;font-size:13.5px;border:1px solid var(--border2);border-left:3px solid var(--accent);border-radius:10px;animation:rise .2s both;max-width:420px;box-shadow:var(--shadow-pop);pointer-events:auto}
+.toast>div.err{border-left-color:var(--bad)}.toast>div.ok{border-left-color:var(--ok)}
+.toast .tm{flex:1;min-width:0;overflow-wrap:anywhere}
+.toast .tu,.toast .tx{flex:none;border:0;background:none;border-radius:6px;cursor:pointer}
+.toast .tu{padding:4px 10px;color:var(--accent-text);font-weight:650;font-size:13px}
+.toast .tx{width:26px;height:26px;color:var(--muted);font-size:11px}
+.toast .tu:hover,.toast .tx:hover{background:var(--hover);color:var(--text)}
+
+/* ---------- motion: a quiet fade-up when a page opens ---------- */
+@keyframes up{from{opacity:0;transform:translateY(6px)}}
+.view.on .body>*{animation:up .32s both}
+.view.on .body>:nth-child(2){animation-delay:.04s}.view.on .body>:nth-child(3){animation-delay:.08s}.view.on .body>:nth-child(4){animation-delay:.12s}.view.on .body>:nth-child(n+5){animation-delay:.16s}
+.view.fill.on .body>*{animation:none}
+.card{transition:border-color .15s}
+
+/* ---------- compact density (account menu or palette; see base.css) ---------- */
+[data-density="compact"] .card{padding:14px}
+[data-density="compact"] .body{gap:12px;padding-top:14px}
+[data-density="compact"] .pagehead{padding-top:18px}
+[data-density="compact"] .btn{height:32px}
+[data-density="compact"] .btn.sm{height:28px}
+[data-density="compact"] td{padding:6px 12px}
+[data-density="compact"] .row{padding:7px 0}
+[data-density="compact"] .metric .val{font-size:24px}
+[data-density="compact"] .step{padding:8px 10px}
+.mt{margin-top:12px}

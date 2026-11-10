@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="dark light" />
+<title>Elyra · personal node console</title>
+<link rel="icon" type="image/svg+xml" href="/app/assets/favicon.svg" />
+<script src="/app/theme-init.js"></script>
+<link rel="stylesheet" href="/app/css/base.css" />
+<link rel="stylesheet" href="/app/css/shell.css" />
+<link rel="stylesheet" href="/app/css/components.css" />
+<link rel="stylesheet" href="/app/css/views.css" />
+<link rel="stylesheet" href="/app/css/ui.css" />
+<link rel="stylesheet" href="/app/css/dash.css" />
+<link rel="stylesheet" href="/app/css/responsive.css" />
+<link rel="stylesheet" href="/app/css/network.css" />
+<link rel="stylesheet" href="/app/css/live.css" />
+</head>
+<body>
+<a class="skip" href="#scroll">Skip to content</a>
+<div class="app">
+  <aside class="side" id="side">
+    <button class="ws" id="ws" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Node menu"></button>
+    <button class="sidesearch" id="cmdk-side" type="button" aria-label="Search views and actions"></button>
+    <nav id="nav" aria-label="Main"></nav>
+    <div class="nodecard" id="nodecard">Connecting…</div>
+    <p class="sidefoot">Owner console · this node only<br>Press <kbd>?</kbd> for shortcuts</p>
+  </aside>
+  <div class="scrim" aria-hidden="true"></div>
+
+  <div class="main">
+    <header class="top">
+      <button class="iconbtn" id="menu" type="button" aria-label="Open menu" aria-controls="side" aria-expanded="false"></button>
+      <nav class="crumb" id="crumb" aria-label="Breadcrumb"></nav>
+      <div class="r">
+        <button class="cmdk-btn" id="cmdk" type="button" aria-label="Search views and actions"></button>
+        <span class="net" id="net-top" title="Which money this node settles with"></span>
+        <span class="chip sim" id="simchip" hidden></span>
+        <span class="chip" id="balchip"></span>
+        <span class="chip" role="status"><span class="dot" id="dot"></span><span id="vprstate">Connecting…</span></span>
+        <button class="avatar" id="acct" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="Account menu"></button>
+      </div>
+    </header>
+    <div class="scroll" id="scroll" tabindex="-1">
+      <section class="view" id="v-overview"></section>
+      <section class="view" id="v-live"></section>
+      <section class="view fill" id="v-playground"></section>
+      <section class="view" id="v-models"></section>
+      <section class="view" id="v-routing"></section>
+      <section class="view" id="v-network"></section>
+      <section class="view" id="v-payments"></section>
+      <section class="view" id="v-provide"></section>
+      <section class="view" id="v-connect"></section>
+    </div>
+  </div>
+</div>
+
+<div class="offline" id="offline" role="alertdialog" aria-labelledby="off-t">
+  <div class="box">
+    <span class="badge bad">Offline</span>
+    <h2 id="off-t">Your router is not running</h2>
+    <p>This is the owner console for the Elyra node serving this page, not the public hosted Playground. Start your node to manage its sources, routing and payments. The console reconnects by itself.</p>
+    <div class="code"><span class="c"># from the elyra folder</span>
+node router/server.mjs</div>
+    <p class="mut" id="offhint"></p>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script type="module" src="/app/main.js"></script>
+</body>
+</html>

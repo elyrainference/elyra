@@ -1,0 +1,60 @@
+/* Live view: presence card + streaming activity feed. Tokens only (base.css); status colour is the row's left edge and its status word. */
+.lv-chip .dot.warn{background:var(--warn);animation:none}
+.lv-grid{display:grid;grid-template-columns:minmax(250px,310px) minmax(0,1fr);gap:16px;align-items:start}
+.lv-side{position:sticky;top:0;min-width:0}
+
+/* presence */
+.lv-sec h4{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.lv-sec h4 .mut{font-size:12px;font-weight:400;letter-spacing:0;text-transform:none}
+.lv-sec+.lv-sec{margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.lv-li{display:flex;align-items:center;gap:9px;min-height:28px;font-size:13px;min-width:0}
+.lv-li .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lv-li .r{margin-left:auto;padding-left:8px;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lv-dot{width:8px;height:8px;flex:none;border-radius:50%;background:var(--faint)}
+.lv-dot.on{background:var(--ok)}
+.lv-dot.off{background:var(--bad)}
+.lv-none{font-size:13px;color:var(--muted)}
+
+/* feed */
+.lv-feed{padding:0;overflow:hidden;min-width:0}
+.lv-bar{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)}
+.lv-cap{font-size:12.5px}
+.lv-empty{padding:28px 0}
+.lv-list{list-style:none;min-height:360px;max-height:calc(100dvh - 292px);overflow-y:auto;overscroll-behavior:contain}
+.lv-row{display:grid;grid-template-columns:68px 74px minmax(0,1fr) 236px 92px;grid-template-areas:"t k m x s";align-items:center;gap:4px 12px;padding:10px 16px 10px 13px;border-bottom:1px solid var(--border);border-left:3px solid transparent;font-size:13px;animation:lvin .26s both}
+.lv-row:last-child{border-bottom:0}
+.lv-row.s-ok{border-left-color:var(--ok)}
+.lv-row.s-bad{border-left-color:var(--bad)}
+.lv-row.s-warn{border-left-color:var(--warn)}
+.lv-row.s-info{border-left-color:var(--accent)}
+.lv-row:hover{background:var(--hover)}
+.lv-t{grid-area:t;color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.lv-k{grid-area:k}
+.lv-m{grid-area:m;min-width:0;overflow-wrap:anywhere}
+.lv-model{font-weight:600}
+.lv-x{grid-area:x;display:grid;grid-template-columns:76px 76px 62px;gap:0 10px;justify-content:end;text-align:right;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.lv-st{grid-area:s;justify-self:end;text-align:right;font-size:12.5px;font-weight:600;color:var(--muted)}
+.lv-row.s-ok .lv-st{color:var(--ok)}
+.lv-row.s-bad .lv-st{color:var(--bad)}
+.lv-row.s-warn .lv-st{color:var(--warn)}
+@keyframes lvin{from{opacity:0;transform:translateY(-5px)}}
+
+/* filters hide rows by attribute: no re-render */
+.lv-list[data-f="buy"] .lv-row:not([data-g="buy"]),
+.lv-list[data-f="sell"] .lv-row:not([data-g="sell"]),
+.lv-list[data-f="peer"] .lv-row:not([data-g="peer"]),
+.lv-list[data-f="money"] .lv-row:not([data-g="money"]),
+.lv-list[data-f="alert"] .lv-row:not([data-g="alert"]){display:none}
+
+@media(max-width:1180px){
+  .lv-grid{grid-template-columns:minmax(0,1fr)}
+  .lv-side{position:static;order:2} /* the feed is the point of the page: presence sits below it when stacked */
+  .lv-list{max-height:72dvh;min-height:0}
+}
+@media(max-width:900px){
+  .lv-row{grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"t k s" "m m m" "x x x";padding:10px 14px 10px 11px}
+  .lv-k{justify-self:start}
+  .lv-x{justify-content:start;text-align:left;grid-template-columns:auto auto auto}
+  .lv-x span:empty{display:none}
+  .lv-x:not(:has(span:not(:empty))){display:none}
+}

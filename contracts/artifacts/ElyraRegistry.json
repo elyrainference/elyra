@@ -1,0 +1,474 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token_",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "bondAmount_",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "BadConfig",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "BadTtl",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "BadUrlLength",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NotListed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NothingBonded",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Reentrancy",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TokenTransferFailed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TransferMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "WithdrawExpired",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "availableAt",
+          "type": "uint256"
+        }
+      ],
+      "name": "WithdrawLocked",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "WithdrawNotRequested",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroNodeId",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "nodeId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "boxKey",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "metaHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "expiresAt",
+          "type": "uint64"
+        }
+      ],
+      "name": "Announced",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "BondPosted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "BondWithdrawn",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        }
+      ],
+      "name": "Revoked",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        }
+      ],
+      "name": "WithdrawCancelled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "availableAt",
+          "type": "uint256"
+        }
+      ],
+      "name": "WithdrawRequested",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_TTL",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_TTL",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_URL_LENGTH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MIN_TTL",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "WITHDRAW_DELAY",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "WITHDRAW_WINDOW",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "nodeId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "boxKey",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "string",
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "metaHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "ttl",
+          "type": "uint64"
+        }
+      ],
+      "name": "announce",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "bondAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "bonded",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "cancelWithdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "expiresAt",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "wallet",
+          "type": "address"
+        }
+      ],
+      "name": "isListed",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "requestWithdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "revoke",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "token",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "withdraw",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawAt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "withdrawExpires",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60c0604052600160045534801561001557600080fd5b50604051610e82380380610e828339810160408190526100349161007e565b801580159061004a57506001600160a01b038216155b15610068576040516301f30c8760e21b815260040160405180910390fd5b6001600160a01b0390911660805260a0526100b8565b6000806040838503121561009157600080fd5b82516001600160a01b03811681146100a857600080fd5b6020939093015192949293505050565b60805160a051610d7461010e60003960008181610192015281816107e20152818161081001526109d80152600081816102b0015281816108570152818161093201528181610a490152610ad80152610d746000f3fe608060405234801561001057600080fd5b50600436106101165760003560e01c8063b6549f75116100a2578063e01b402d11610071578063e01b402d14610231578063ef62821a1461023b578063f19e2a2114610245578063f794062e14610265578063fc0c546a146102ab57600080fd5b8063b6549f75146101ed578063cb71146e146101f5578063dbfd5461146101fe578063df0a64361461021157600080fd5b806375cbda24116100e957806375cbda241461016d57806380f323a71461018d57806384b76824146101b4578063a87644c8146101bc578063b3423eec146101e557600080fd5b80630d5e5fff1461011b57806330f81250146101385780633ccfd60b146101425780634640d9261461014c575b600080fd5b6101256201518081565b6040519081526020015b60405180910390f35b61012562093a8081565b61014a6102ea565b005b610155610e1081565b6040516001600160401b03909116815260200161012f565b61012561017b366004610b53565b60026020526000908152604090205481565b6101257f000000000000000000000000000000000000000000000000000000000000000081565b61014a610454565b6101556101ca366004610b53565b6000602081905290815260409020546001600160401b031681565b61014a61049b565b61014a6105ae565b61012561010081565b61014a61020c366004610b9f565b61062c565b61012561021f366004610b53565b60036020526000908152604090205481565b61015562278d0081565b61015562093a8081565b610125610253366004610b53565b60016020526000908152604090205481565b61029b610273366004610b53565b6001600160a01b0316600090815260208190526040902054426001600160401b039091161190565b604051901515815260200161012f565b6102d27f000000000000000000000000000000000000000000000000000000000000000081565b6040516001600160a01b03909116815260200161012f565b60045460011461030d5760405163558a1e0360e11b815260040160405180910390fd5b60026004819055336000908152602091909152604081205490819003610345576040516203117960ed1b815260040160405180910390fd5b8042101561036d5760405163fb5d3d9d60e01b81526004810182905260240160405180910390fd5b3360009081526003602052604090205442111561039d576040516306a94d0d60e41b815260040160405180910390fd5b336000818152600160208181526040808420805460028452828620869055600384528286208690559383529390935591518181529092917f0d41118e36df44efb77a471fc49fb9c0be0406d802ef95520e9fbf606e65b455910160405180910390a2801561044b576040513360248201526044810182905261044b9060640160408051601f198184030181529190526020810180516001600160e01b031663a9059cbb60e01b179052610a44565b50506001600455565b3360008181526002602090815260408083208390556003909152808220829055517f8b775bb80a5d4addc5ea2601b2378ae89a1bb9010227157ac02aa71498e799c49190a2565b3360009081526001602052604081205490036104ca57604051631643efef60e21b815260040160405180910390fd5b336000908152602081905260409020546001600160401b03161561052d5733600081815260208190526040808220805467ffffffffffffffff19169055517fb6fa8b8bd5eab60f292eca876e3ef90722275b785309d84b1de113ce0b8c4e749190a25b600061053c6201518042610c54565b336000908152600260205260409020819055905061055d62093a8082610c54565b33600081815260036020526040908190209290925590517ff7774b688d56120b783560a913ee60792a73dfd511812b7be5eccf10d08c6689906105a39084815260200190565b60405180910390a250565b336000908152602081905260408120546001600160401b031690036105e65760405163665c1c5760e01b815260040160405180910390fd5b33600081815260208190526040808220805467ffffffffffffffff19169055517fb6fa8b8bd5eab60f292eca876e3ef90722275b785309d84b1de113ce0b8c4e749190a2565b60045460011461064f5760405163558a1e0360e11b815260040160405180910390fd5b600260045585610672576040516339d8414360e21b815260040160405180910390fd5b82801580610681575061010081115b1561069f576040516331d1726f60e01b815260040160405180910390fd5b816001600160401b03166000036106b75762093a8091505b610e106001600160401b03831610806106db575062278d006001600160401b038316115b156106f957604051634c2c16bf60e11b815260040160405180910390fd5b60006107058342610c6d565b33600090815260208181526040808320805467ffffffffffffffff19166001600160401b038616179055600290915290205490915015610785573360008181526002602090815260408083208390556003909152808220829055517f8b775bb80a5d4addc5ea2601b2378ae89a1bb9010227157ac02aa71498e799c49190a25b336001600160a01b03167f026fc3843b7fe16d8bbfff05595152b3582926cbb257c6d12cec979c5f981ac08989898989876040516107c896959493929190610c8c565b60405180910390a2336000908152600160205260409020547f0000000000000000000000000000000000000000000000000000000000000000811015610a34576000610834827f0000000000000000000000000000000000000000000000000000000000000000610ce3565b6040516370a0823160e01b81523060048201529091506000906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa15801561089e573d6000803e3d6000fd5b505050506040513d601f19601f820116820180604052508101906108c29190610cf6565b604051336024820152306044820152606481018490529091506109119060840160408051601f198184030181529190526020810180516001600160e01b03166323b872dd60e01b179052610a44565b6040516370a0823160e01b8152306004820152829082906001600160a01b037f000000000000000000000000000000000000000000000000000000000000000016906370a0823190602401602060405180830381865afa158015610979573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061099d9190610cf6565b6109a79190610ce3565b146109c557604051637eff902560e11b815260040160405180910390fd5b33600081815260016020526040908190207f00000000000000000000000000000000000000000000000000000000000000009055517facde08da7a4be3e2266a1741a5ca5262d59cad87cfda42f1753a9fb72c1d154090610a299085815260200190565b60405180910390a250505b5050600160045550505050505050565b6000807f00000000000000000000000000000000000000000000000000000000000000006001600160a01b031683604051610a7f9190610d0f565b6000604051808303816000865af19150503d8060008114610abc576040519150601f19603f3d011682016040523d82523d6000602084013e610ac1565b606091505b5091509150811580610afb57506001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000163b155b80610b305750805115801590610b305750602081511080610b30575080806020019051810190610b2b9190610cf6565b600114155b15610b4e5760405163022e258160e11b815260040160405180910390fd5b505050565b600060208284031215610b6557600080fd5b81356001600160a01b0381168114610b7c57600080fd5b9392505050565b80356001600160401b0381168114610b9a57600080fd5b919050565b60008060008060008060a08789031215610bb857600080fd5b863595506020870135945060408701356001600160401b03811115610bdc57600080fd5b8701601f81018913610bed57600080fd5b80356001600160401b03811115610c0357600080fd5b896020828401011115610c1557600080fd5b6020919091019450925060608701359150610c3260808801610b83565b90509295509295509295565b634e487b7160e01b600052601160045260246000fd5b80820180821115610c6757610c67610c3e565b92915050565b6001600160401b038181168382160190811115610c6757610c67610c3e565b86815285602082015260a060408201528360a0820152838560c0830137600060c08583010152600060c0601f19601f87011683010190508360608301526001600160401b0383166080830152979650505050505050565b81810381811115610c6757610c67610c3e565b600060208284031215610d0857600080fd5b5051919050565b6000825160005b81811015610d305760208186018101518583015201610d16565b50600092019182525091905056fea2646970667358221220d5c274c1998cdf6c86cce4b8793615e44a84446be28a2b002c175ad7b564d71c64736f6c634300081a0033",
+  "compiler": "solc 0.8.26"
+}

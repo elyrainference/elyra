@@ -1,0 +1,12 @@
+{
+  "name": "elyra-pages",
+  "private": true,
+  "type": "module",
+  "description": "Builds the Cloudflare Pages bundle: landing (site/) + rendered docs. Dev-only, not part of the runtime.",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "marked": "^18.1.3"
+  }
+}

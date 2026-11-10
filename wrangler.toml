@@ -1,0 +1,5 @@
+# Cloudflare Pages project for the public website (landing + docs).
+# Build first: cd tools/pages && npm ci && npm run build   (writes ./dist)
+name = "elyra"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-11-01"

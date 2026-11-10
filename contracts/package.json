@@ -1,0 +1,19 @@
+{
+  "name": "elyra-contracts",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Elyra escrow contract (payment channel settled in an ERC-20 (USDG))",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "test": "hardhat test",
+    "rehearse:mainnet": "node scripts/fork-rehearsal.mjs"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-chai-matchers": "^2.1.2",
+    "@nomicfoundation/hardhat-ethers": "^3.1.3",
+    "chai": "^4.5.0",
+    "ethers": "^6.13.0",
+    "hardhat": "^2.22.0",
+    "solc": "0.8.26"
+  }
+}

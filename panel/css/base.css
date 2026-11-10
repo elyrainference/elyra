@@ -1,0 +1,71 @@
+/* Elyra control panel: design tokens + app shell (sidebar, top bar, page frame).
+   Dark is the default; [data-theme="light"] overrides the colour tokens only (set by theme-init.js before first paint).
+   System font stack on purpose: no web fonts, nothing to license or load. Monospace is for addresses, URLs, hashes and code. */
+:root{
+  color-scheme:dark;
+  --bg:#0b0d12; --surface:#12151c; --raised:#181c26; --input:#0e1118; --hover:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.08); --border2:rgba(255,255,255,.15);
+  --text:#e8eaf0; --muted:#8b93a7; --faint:#7d8599;
+  --accent:#6d6bff; --accent-solid:#5b59f5; --accent-text:#a5a4ff; --accent-bg:rgba(109,107,255,.14); --accent-bd:rgba(109,107,255,.42);
+  --grad:linear-gradient(135deg,#5b59f5,#8257f0); --grad-hover:linear-gradient(135deg,#6a68ff,#9166f5); --on-accent:#fff;
+  --ok:#3ddc97; --ok-bg:rgba(61,220,151,.12); --ok-bd:rgba(61,220,151,.34);
+  --warn:#fbbf24; --warn-bg:rgba(251,191,36,.12); --warn-bd:rgba(251,191,36,.34);
+  --bad:#ff7a8a; --bad-bg:rgba(255,122,138,.12); --bad-bd:rgba(255,122,138,.36);
+  --sim:#c4a8ff; --sim-bg:rgba(196,168,255,.12); --sim-bd:rgba(196,168,255,.36);
+  --code-bg:#0a0c11; --code-text:#c9d0e4; --code-dim:#7b84a1; --code-g:#7ee7b0; --code-s:#f2d98c; --code-k:#a9b0ff;
+  --shadow:0 1px 2px rgba(0,0,0,.35),0 4px 14px rgba(0,0,0,.18); --shadow-pop:0 10px 34px rgba(0,0,0,.5);
+  --ring:#8e8dff; --scrim:rgba(4,6,10,.62);
+  --font:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+  --r-card:12px; --r-ctl:8px; --side:232px; --top:56px;
+}
+[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f5f6fa; --surface:#ffffff; --raised:#f1f3f9; --input:#ffffff; --hover:rgba(15,23,42,.045);
+  --border:rgba(15,23,42,.1); --border2:rgba(15,23,42,.2);
+  --text:#0f172a; --muted:#566074; --faint:#626c82;
+  --accent:#4f46e5; --accent-solid:#4f46e5; --accent-text:#4338ca; --accent-bg:rgba(79,70,229,.09); --accent-bd:rgba(79,70,229,.38);
+  --grad:linear-gradient(135deg,#4f46e5,#7c3aed); --grad-hover:linear-gradient(135deg,#5b52f0,#8749f5);
+  --ok:#036a4b; --ok-bg:rgba(4,120,87,.09); --ok-bd:rgba(4,120,87,.32);
+  --warn:#855004; --warn-bg:rgba(154,91,6,.09); --warn-bd:rgba(154,91,6,.34);
+  --bad:#a91f33; --bad-bg:rgba(192,39,58,.08); --bad-bd:rgba(192,39,58,.32);
+  --sim:#6d28d9; --sim-bg:rgba(109,40,217,.08); --sim-bd:rgba(109,40,217,.32);
+  --code-bg:#0f172a; --code-text:#d5dbee; --code-dim:#8591b0; --code-g:#7ee7b0; --code-s:#f2d98c; --code-k:#b4baff;
+  --shadow:0 1px 2px rgba(15,23,42,.06),0 2px 8px rgba(15,23,42,.04); --shadow-pop:0 12px 36px rgba(15,23,42,.18);
+  --ring:#4f46e5; --scrim:rgba(15,23,42,.45);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+[data-density="compact"]{--top:48px;--pad:14px;--nav-h:32px;--ctl-h:32px}
+body{background:var(--bg);color:var(--text);font:14px/1.55 var(--font);overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--accent-text);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font:inherit;color:inherit}
+code,.mono{font-family:var(--mono);font-size:.92em}
+code{background:var(--raised);border:1px solid var(--border);padding:1px 6px;border-radius:6px;overflow-wrap:anywhere}
+b,strong{font-weight:600}
+::selection{background:var(--accent-solid);color:#fff}
+:focus-visible{outline:2px solid var(--ring);outline-offset:2px;border-radius:6px}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:8px;border:2px solid transparent;background-clip:content-box}
+::-webkit-scrollbar-thumb:hover{background:var(--faint);background-clip:content-box;border:2px solid transparent}
+::-webkit-scrollbar-track{background:transparent}
+[hidden]{display:none!important}
+.mut{color:var(--muted)}
+.up{color:var(--ok)}.down{color:var(--bad)}.warn{color:var(--warn)}
+
+.app{display:grid;grid-template-columns:var(--side) minmax(0,1fr);height:100vh;height:100dvh}
+
+/* ---------- page frame ---------- */
+.pagehead,.body{width:100%;max-width:1240px;margin:0 auto;padding-left:28px;padding-right:28px}
+.pagehead{padding-top:28px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px 24px;flex-wrap:wrap}
+.pagehead .ph{min-width:0;flex:1 1 420px}
+.pagehead .act{display:flex;gap:8px;flex-wrap:wrap}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text);margin-bottom:6px}
+h1{font-size:26px;line-height:1.2;font-weight:650;letter-spacing:-.02em;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.lede{max-width:72ch;margin-top:8px;font-size:14px;color:var(--muted)}
+.body{padding-top:20px;padding-bottom:56px;display:flex;flex-direction:column;gap:16px}
+.body>:empty{display:none}
+.body.lead{padding-top:28px}
+.body.fill{flex:1;min-height:0;padding-bottom:20px}

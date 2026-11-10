@@ -1,0 +1,25 @@
+{
+  "name": "elyra",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Elyra — peer-to-peer network for AI inference. Self-hosted Virtual Private Router (VPR), control panel, escrow contract and landing page.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node router/server.mjs",
+    "node2": "node router/server.mjs --port 8546 --data .elyra-b --name provider-b --no-demo --seed http://localhost:8545",
+    "test": "node router/test/run-all.mjs",
+    "catalog:stats": "node tools/catalog-stats.mjs",
+    "chain:install": "cd contracts && npm ci",
+    "chain:build": "cd contracts && npm run build",
+    "chain:test": "cd contracts && npm test",
+    "chain:deploy": "node contracts/deploy.mjs",
+    "chain:verify": "node contracts/verify.mjs",
+    "chain:deploy:testnet": "node contracts/deploy.mjs --testnet --node-wallet .elyra --mock-token"
+  },
+  "dependencies": {
+    "ethers": "^6.17.0"
+  }
+}

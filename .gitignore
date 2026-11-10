@@ -1,0 +1,19 @@
+# node identity + wallet private key + state: NEVER commit
+.elyra/
+.elyra-*/
+.solais/
+.solais-*/
+*.env
+.env*
+node_modules/
+*.log
+contracts/cache/
+contracts/node_modules/
+tools/brand/node_modules/
+
+# website build output
+dist/
+tools/pages/node_modules/
+.wrangler/
+tools/wallet/node_modules/
+

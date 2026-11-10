@@ -1,0 +1,14 @@
+{
+  "name": "elyra-wallet-bundle",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Dev-only: bundles Reown AppKit + ethers into panel/vendor/wallet.js. The node itself has no dependency on any of this.",
+  "type": "module",
+  "scripts": { "build": "node build.mjs" },
+  "devDependencies": {
+    "@reown/appkit": "1.8.24",
+    "@reown/appkit-adapter-ethers": "1.8.24",
+    "esbuild": "0.28.2",
+    "ethers": "6.13.5"
+  }
+}

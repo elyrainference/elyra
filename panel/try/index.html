@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elyra · live market for AI inference</title>
+<meta name="description" content="Browse real AI model offers, compare sellers, and try the hosted Playground. Use your own node for local inference or paid peer routing.">
+<meta name="twitter:site" content="@Elyrainference"><meta name="twitter:card" content="summary_large_image"><meta property="og:image" content="https://app.elyrainference.com/try/og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:image" content="https://app.elyrainference.com/try/og.png"><meta property="og:title" content="Elyra: a live market for AI inference"><meta property="og:description" content="Compare real model offers. Try the hosted Playground, or connect your own model and sell capacity from your node.">
+<link rel="icon" type="image/svg+xml" href="/try/favicon.svg"><link rel="icon" type="image/png" sizes="32x32" href="/try/favicon-32.png"><link rel="alternate icon" href="/try/favicon.ico"><link rel="apple-touch-icon" href="/try/apple-touch-icon.png"><script src="/try/theme.js"></script><link rel="stylesheet" href="/try/try.css"><link rel="stylesheet" href="/try/landing.css"><link rel="stylesheet" href="/try/stats.css"><link rel="stylesheet" href="/try/skin.css"></head>
+<body data-route="market">
+<a class="skip" href="#view">Skip to content</a>
+<header class="bar"><div class="wrap bar-in">
+  <a class="brand" href="https://elyrainference.com/" aria-label="Elyra, go to the home page"><span class="mark" aria-hidden="true"></span><span>Elyra</span><span class="badge accent beta">Beta</span></a>
+  <nav class="links" id="nav" aria-label="Main">
+    <a href="#/market" data-route="market">Market</a>
+    <a href="#/playground" data-route="playground">Playground</a>
+    <a href="#/stats" data-route="stats">Stats</a>
+    <a href="#/sell" data-route="sell">Sell</a>
+    <a class="hide-s" href="https://elyrainference.com/docs/" target="_blank" rel="noopener" aria-label="Docs (opens in a new tab)">Docs<svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3L7.5 8.5"/></svg></a>
+    <a class="hide-s" href="https://github.com/elyrainference/elyra" target="_blank" rel="noopener" aria-label="GitHub (opens in a new tab)">GitHub<svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3L7.5 8.5"/></svg></a>
+    <a class="hide-s" href="https://x.com/Elyrainference" target="_blank" rel="noopener" aria-label="X (opens in a new tab)">X<svg class="ext" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3L7.5 8.5"/></svg></a>
+  </nav>
+  <div class="bar-r">
+    <button class="walletbtn" id="walletbtn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="wallet-pop"><span class="wdot" aria-hidden="true"></span><span id="wlabel">Connect wallet</span><span class="badge wtier" id="wtier" hidden></span></button>
+  </div>
+  <div class="wallet-pop" id="wallet-pop" hidden role="dialog" aria-labelledby="wallet-h">
+    <div class="pop-h"><b id="wallet-h">Wallet</b><button class="x" id="wallet-x" type="button" aria-label="Close wallet menu">&#10005;</button></div>
+    <div id="wallet-body"><p class="muted small">Loading…</p></div>
+    <details class="pay-adv" id="pay-adv" hidden><summary>Paid session · funding &amp; usage</summary><div id="pay-body" class="pay"></div></details>
+  </div>
+</div></header>
+
+<main id="view">
+<!-- MARKET -->
+<section class="page" data-page="market" aria-labelledby="h-market" hidden>
+  <div class="hero"><div class="wrap hero-grid">
+    <div class="hero-l">
+      <div class="eyebrow">Public app · real offers · unaudited beta</div>
+      <h1 id="h-market" tabindex="-1">Find your next model.<br>Choose how to use it.</h1>
+      <p class="lede">Compare models and the sellers this node can reach. Try a hosted model with a free quota, or use your own node to route requests and pay peers directly. Browse first; connect a wallet only when you need it.</p>
+      <div class="cta"><a class="btn primary lg" href="#/playground">Try the playground</a><a class="btn lg" href="#/sell">Sell model capacity</a></div>
+      <div class="chip" id="live" role="status"><i class="dot"></i><span id="live-t">Connecting to the node…</span></div>
+    </div>
+    <div class="hero-r">
+      <div class="code"><div class="code-h">Use it from your own tools</div><button class="copy" type="button">Copy</button><pre>git clone https://github.com/elyrainference/elyra
+cd elyra &amp;&amp; npm ci --omit=dev
+npm start -- --seed https://app.elyrainference.com
+
+# any OpenAI-compatible tool:
+#   base URL  http://localhost:8545/v1
+#   model     auto:cheapest</pre></div>
+      <p class="hero-note">Your router picks the seller by price, speed, reputation or privacy and pays them directly. <a href="https://elyrainference.com/docs/quickstart/">Quickstart</a></p>
+    </div>
+    <dl class="strip hero-stats" aria-label="Live market numbers" id="stats">
+      <div><dt>Models</dt><dd id="s-models">-</dd></div>
+      <div><dt>Sellers online</dt><dd id="s-sellers">-</dd></div>
+      <div><dt>Cheapest / 1M tokens</dt><dd id="s-cheapest">-</dd></div>
+      <div><dt>Settlement</dt><dd id="s-settle">-</dd></div>
+    </dl>
+  </div></div>
+  <div class="wrap page-b">
+    <section class="how" aria-labelledby="how-h">
+      <h2 class="sec-h" id="how-h">Three ways to use Elyra</h2>
+      <ol class="how-g">
+        <li class="card how-c"><h3>Own model · no escrow</h3><p class="muted">Connect Ollama, LM Studio or an OpenAI-compatible source in your personal node console. Local inference needs no escrow deposit. Hosted API sources still have their own provider bill.</p><a href="https://elyrainference.com/docs/quickstart/">Set up your node →</a></li>
+        <li class="card how-c"><h3>Hosted try · free quota</h3><p class="muted" id="try-access">Try this operator's model in the Playground. A free quota applies; this deployment will tell you if wallet sign-in and a username are required. Signing in is not a payment.</p><a href="#/playground">Open hosted Playground →</a></li>
+        <li class="card how-c"><h3>Paid peer · escrow session</h3><p class="muted" id="paid-access">Review real seller offers below. Your own node can pay peers in USDG; browser sessions are available only when this deployment enables them. No funds move just by browsing.</p><a href="https://elyrainference.com/docs/usage/">Understand paid routing →</a></li>
+      </ol>
+    </section>
+    <section class="card market" aria-labelledby="market-h">
+      <div class="card-h"><h2 id="market-h">Models and sellers</h2><span class="left" id="updated"></span></div>
+      <p class="muted small market-context">Reachable offers from this node, not a global network index. Open a model to compare sellers. A model-level action does not pin a particular seller.</p>
+      <div class="tools">
+        <input class="search" id="search" type="search" placeholder="Search models" aria-label="Search models" autocomplete="off" maxlength="60">
+        <div class="seg" role="group" aria-label="Filter"><button type="button" class="on" data-f="all" aria-pressed="true">All</button><button type="button" data-f="private" aria-pressed="false">Private</button><button type="button" data-f="try" aria-pressed="false">Free to try</button></div>
+        <label class="sort">Sort <select id="sort"><option value="price">Price</option><option value="speed">Speed</option><option value="sellers">Sellers</option></select></label>
+      </div>
+      <div class="mhead" aria-hidden="true"><span>Model</span><span>Sellers</span><span>Price / 1M tokens</span><span>Speed</span><span>Privacy</span><span></span></div>
+      <ul class="mlist" id="mlist"><li class="mempty">Loading the market…</li></ul>
+      <details class="legend"><summary>What do the labels mean?</summary><p><b>Local</b> runs on the seller's own computer. <b>Remote</b> is forwarded to another machine whose owner can read prompts. <b>TEE verified</b> means this node checked a hardware attestation. <b>Clear</b> means no privacy claim. Speed is <i>measured</i> by this node, or <i>claimed</i> by the seller. Select a model to see each seller.</p></details>
+    </section>
+<ul class="trust" aria-label="What you can rely on, and what you cannot">
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M4 7.5l8 4.5 8-4.5M12 12v9"/></svg></span><div><b>Real models, named machines</b><p>Answers come from real models. The route details name the machine that answered, and a value that was not measured says so.</p></div></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><div><b>Signed receipts</b><p>Each answer from a peer carries a receipt signed with that seller's key: model, tokens, price and amount.</p></div></li>
+      <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01"/></svg></span><div><b>Escrow on Robinhood Chain</b><p>Buyers deposit into an escrow contract and sellers redeem signed vouchers from it. Testnet first.</p></div></li>
+      <li class="warn"><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17h.01"/></svg></span><div><b>Unaudited beta</b><p>The contracts are not audited. Mainnet deposits are capped per wallet (default $20). Only use money you can afford to lose.</p></div></li>
+    </ul>
+    <div id="market-paid" class="page-note"></div>
+  </div>
+</section>
+
+<!-- PLAYGROUND -->
+<section class="page pg" data-page="playground" aria-labelledby="h-play" hidden>
+  <div class="pg-in">
+    <div class="pg-bar">
+      <h1 id="h-play" tabindex="-1">Playground</h1>
+      <label class="pick"><span class="sr">Model</span><select id="pick" aria-label="Model to chat with"></select></label>
+      <button class="btn ghost sm" id="session-usage" type="button" hidden>Session &amp; usage</button>
+      <button class="btn ghost sm" id="clear" type="button">Clear history</button>
+    </div>
+    <div class="pg-sub">
+      <div class="modelline" id="modelline"></div>
+      <div class="quota" id="quota" role="group" aria-label="Free quota"><span class="badge tier" id="q-tier"></span><span class="qbar" aria-hidden="true"><i id="q-fill"></i></span><span class="qtext" id="q-text">Checking…</span></div>
+    </div>
+    <div class="msgs" id="msgs" tabindex="0" role="log" aria-label="Conversation" aria-live="polite">
+      <div class="thread" id="thread">
+        <div class="empty" id="empty">
+          <h2>Ask a live model</h2>
+          <p class="muted" id="empty-p">Checking this deployment's models and access requirements…</p>
+          <div class="starters" id="chips">
+            <button type="button" class="starter">Explain what a peer-to-peer inference network is in 3 sentences</button>
+            <button type="button" class="starter">Write a haiku about routing packets</button>
+            <button type="button" class="starter">What is a good name for a pet octopus?</button>
+          </div>
+          <div class="empty-cards">
+            <aside class="note" id="nudge" aria-label="Sign in with a wallet"></aside>
+            <div id="chat-paid"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gate" id="gate" role="status" hidden><p id="gate-t"></p><button class="btn primary sm" id="gate-btn" type="button">Connect wallet</button></div>
+    <form class="composer" id="form" autocomplete="off">
+      <textarea id="q" rows="1" maxlength="1500" placeholder="Ask anything…" aria-label="Your message"></textarea>
+      <button class="btn primary" id="send" type="submit">Send</button>
+    </form>
+    <label class="paymode" id="paymode-w" hidden><input type="checkbox" id="paymode"> Paid peer mode · use my escrow session</label>
+    <p class="fine" id="fine">Conversation history stays in this browser; messages are sent to the selected model to answer. <span id="fine-model">Checking the node…</span> <a href="#/market">Compare model offers.</a></p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="page statspage" data-page="stats" aria-labelledby="h-stats" hidden>
+  <div class="wrap" id="stats-root"><p class="muted small">Loading…</p></div>
+</section>
+
+<!-- SELL -->
+<section class="page" data-page="sell" aria-labelledby="h-sell" hidden>
+  <div class="hero hero-s"><div class="wrap">
+    <div class="eyebrow">Sell capacity</div>
+    <h1 id="h-sell" tabindex="-1">Your model. Your offer. Your earnings.</h1>
+    <p class="lede">Selling happens in your own node console, not in this public wallet account. Connect a source, choose models and USDG prices, make the node reachable, then track what buyers actually pay. Start on testnet: contracts are unaudited.</p>
+  </div></div>
+  <div class="wrap page-b">
+    <ol class="steps">
+      <li class="card step"><span class="num-b" aria-hidden="true">1</span><h2>Connect your source</h2><p class="muted">Run Ollama, LM Studio or an OpenAI-compatible server. In your own node console, open Sources &amp; tools, detect or add the source, then test it in Playground. Using your own model needs no escrow payment.</p><div class="code mini"><button class="copy" type="button">Copy</button><pre>ollama pull llama3.2:1b</pre></div><p class="small"><a href="https://elyrainference.com/docs/ollama/">Ollama guide</a></p></li>
+      <li class="card step"><span class="num-b" aria-hidden="true">2</span><h2>Publish a reachable offer</h2><p class="muted">Open Sell capacity → Models &amp; pricing in your node console. Choose sources, models and prices per million tokens; save the offer. Check Reachability next. A relay lets buyers reach a home node without port forwarding.</p><p class="small"><a href="https://elyrainference.com/docs/provider/">Seller setup</a> · <a href="https://elyrainference.com/docs/provider/#behind-a-home-router-use-a-relay">Relay guide</a></p></li>
+      <li class="card step"><span class="num-b" aria-hidden="true">3</span><h2>Track and redeem earnings</h2><p class="muted">Configure settlement in your node's Payments view and keep ETH for redemption gas. Buyers fund their own escrow; you do not deposit to use your own model. Check Sell capacity → Earnings for served usage, vouchers and paid-out USDG.</p><p class="small"><a href="https://elyrainference.com/docs/wallet/">Wallet and USDG</a> · <a href="https://elyrainference.com/docs/quickstart/">Start your node</a></p></li>
+    </ol>
+    <section class="earn" aria-labelledby="earn-h">
+      <h2 class="sec-h" id="earn-h">What you earn</h2>
+      <div class="earn-g">
+        <div class="card"><h3>You set the price</h3><p class="muted">Dollars per million tokens, one default and a price per model if you like. Buyers' routers compare it with every other seller, so a fair price wins requests.</p></div>
+        <div class="card"><h3>You are paid per token</h3><p class="muted">Each request is metered in tokens and paid with a signed voucher that you redeem from the escrow. No subscription and no minimum.</p></div>
+        <div class="card"><h3>What it costs you</h3><p class="muted">Your own hardware or API bill, plus a few cents of ETH for gas when you redeem. Your node's panel shows earnings per day.</p></div>
+      </div>
+      <p class="earn-x card"><b>Example.</b> At $0.05 per 1M tokens, serving 20M tokens pays $1.00. That is arithmetic, not a forecast: what you actually sell depends on your price, speed and model. Elyra is an unaudited beta, so start on the testnet.</p>
+    </section>
+    <div class="card cmd"><div class="card-h"><h2>The command to run</h2><span class="left">Linux / macOS shell. Adjust the price and the model server URL.</span></div>
+      <div class="code"><button class="copy" type="button">Copy</button><pre>git clone https://github.com/elyrainference/elyra
+cd elyra &amp;&amp; npm ci --omit=dev
+
+ELYRA_UPSTREAM_URL=http://127.0.0.1:11434/v1 \
+ELYRA_PROVIDE=1 ELYRA_PROVIDE_PRICE=0.05 \
+ELYRA_RELAY_URL=https://app.elyrainference.com \
+npm start -- --seed https://app.elyrainference.com</pre></div>
+      <p class="small muted">Then open <code>http://localhost:8545/app/</code> on that machine. Review sources, offers, settlement and reachability there. A reachable offer can appear to connected peers; publication does not guarantee buyers or earnings.</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <div class="foot-g">
+    <div class="foot-b"><a class="brand" href="https://elyrainference.com/" aria-label="Elyra, go to the home page"><span class="mark" aria-hidden="true"></span><span>Elyra</span></a><p>A live market for AI inference. Early build: unaudited contracts, capped mainnet, answers from small models that can be wrong.</p></div>
+    <nav aria-label="Product"><h2>Product</h2><a href="#/market">Market</a><a href="#/playground">Playground</a><a href="#/sell">Sell capacity</a></nav>
+    <nav aria-label="Resources"><h2>Resources</h2><a href="https://elyrainference.com/docs/">Documentation</a><a href="https://elyrainference.com/docs/quickstart/">Quickstart</a><a href="https://elyrainference.com/docs/provider/">Run a node</a><a href="https://elyrainference.com/docs/security/">Security</a></nav>
+    <nav aria-label="Project and legal"><h2>Project</h2><a href="#/stats/token">$ELYRA token</a><a href="https://github.com/elyrainference/elyra">GitHub</a><a href="https://x.com/Elyrainference">X (Twitter)</a><a href="https://github.com/elyrainference/elyra/blob/main/LICENSE">MIT license</a><a href="https://elyrainference.com/legal/terms/">Terms</a><a href="https://elyrainference.com/legal/privacy/">Privacy</a></nav>
+  </div>
+  <div class="foot-in">
+    <p class="ca-line">$ELYRA contract (Robinhood Chain): <a href="https://robinhoodchain.blockscout.com/token/0x42cc3f36bb20481378bc0d84ebdfd4fe8f17fbf5" target="_blank" rel="noopener"><code>0x42cc3f36bb20481378bc0d84ebdfd4fe8f17fbf5</code></a></p>
+    <p id="nodeline">Elyra is an early build. Answers in the playground come from small local models and can be wrong.</p>
+  </div>
+</div></footer>
+
+<template id="tpl-paid"><aside class="note paid" aria-label="Paid models">
+  <h3>Paid peers · choose your payment path</h3>
+  <p class="muted small" data-paid-copy>Your own node signs vouchers for paid peer requests. This public app only offers browser payment when the operator enables it. Free hosted try and your own local model need no escrow deposit; wallet sign-in alone never funds a session.</p>
+  <div class="code mini"><button class="copy" type="button">Copy</button><pre>git clone https://github.com/elyrainference/elyra &amp;&amp; cd elyra &amp;&amp; npm ci --omit=dev &amp;&amp; npm start</pre></div>
+  <p class="small"><a href="https://elyrainference.com/docs/quickstart/">Quickstart</a> · <a href="https://elyrainference.com/docs/usage/">Using paid peers</a></p>
+</aside></template>
+
+<script type="module" src="/try/try.js"></script>
+</body></html>

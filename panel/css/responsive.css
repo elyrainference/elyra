@@ -1,0 +1,65 @@
+/* Responsive rules. Tablet: stacked grids. Phone (<=900px): the sidebar becomes a drawer opened from the top bar, one column,
+   wide tables and code scroll inside their own box, nothing widens the page. */
+@media(max-width:1180px){
+  .g21{grid-template-columns:minmax(0,1fr)}
+  .view.fill.on{display:block;height:auto}
+  .body.fill{flex:none}
+  .pg{display:flex;flex-direction:column}
+  .card.chat{height:72vh;min-height:420px}
+  .pg-side{overflow:visible}
+}
+@media(max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;z-index:60;top:0;bottom:0;left:0;width:min(84vw,300px);transform:translateX(-102%);transition:transform .22s ease,box-shadow .22s}
+  body.drawer .side{transform:none;box-shadow:var(--shadow-pop)}
+  body.drawer .scrim{display:block;position:fixed;inset:0;z-index:55;background:var(--scrim)}
+  #menu{display:inline-grid}
+  header.top{padding:0 14px;gap:8px}
+  .crumb .c-node,.crumb .c-grp,.crumb .h{display:none}
+  .crumb{flex:1}
+  header.top .r{flex:none}
+  .chip.sim,#balchip,#vprstate,.cmdk-btn .lbl,.cmdk-btn kbd{display:none}
+  .cmdk-btn{width:34px;height:34px;justify-content:center;padding:0;background:var(--surface)}
+  header.top .r{gap:6px}
+  #net-top{display:inline-flex}
+  #net-top .nx,.guide .gnext{display:none}
+  .quick{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,72%);grid-template-columns:none;overflow-x:auto;scroll-snap-type:x proximity;margin:0 -16px;padding:2px 16px 8px;scroll-padding:0 16px}
+  .qa{scroll-snap-align:start}
+  .chip{padding:0 10px}
+  .pagehead,.body{padding-left:16px;padding-right:16px}
+  .pagehead{padding-top:20px}
+  h1{font-size:22px}
+  .g2,.fgrid{grid-template-columns:minmax(0,1fr)}
+  .g4,.g5{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card{padding:16px;min-width:0}
+  .card.stat{padding:14px}
+  .metric .val{font-size:22px}
+  .savebar{margin:16px -16px -16px;padding:12px 16px}
+  .row .v{text-align:left;margin-left:0}
+  .next .act{width:100%}
+  .step{flex-wrap:wrap}
+  .step>div{flex:1 1 calc(100% - 50px)}
+  .step .btn{margin-left:40px}
+  .step .acts{margin-left:40px;justify-content:flex-start}
+  .tablewrap.tall{max-height:calc(100dvh - 300px)}
+  .toolbar .count{margin-left:0;width:100%}
+  .search{max-width:none;flex-basis:100%}
+  .pills{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding-bottom:2px}
+  .pill{flex:none}
+  .msg{max-width:92%}
+  .toast{left:14px;right:14px;bottom:14px}
+  .toast div{max-width:none}
+  .seg{max-width:100%}
+  #ov-guide summary{flex-wrap:wrap}
+  #ov-role{flex-wrap:wrap}
+}
+@media(max-width:340px){
+  .g4,.g5{grid-template-columns:minmax(0,1fr)}
+}
+@media(max-width:420px){
+  .btn.lg{padding:0 14px}
+  .pagehead .act .btn{flex:1 1 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+}

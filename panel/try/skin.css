@@ -1,0 +1,51 @@
+/* One skin for the public pages: the landing page look. White paper, navy ink, indigo accent, square corners, display font (teknolog) in
+   capitals for headings, labels, nav and buttons, small chamfered corners on primary buttons, navy hero band. Loaded after try.css, landing.css and stats.css. */
+*,*::before,*::after{border-radius:0!important}
+.dot,.wdot,.sp-tag.live::before,.sp-legend .sw{border-radius:50%!important}
+body{background:var(--bg);color:var(--text)}
+h1,h2,h3,.brand,.links a,.btn,.walletbtn,.badge,.eyebrow,.sec-h,.mhead,.strip dt,.foot h2,.sp-pill,.sp-item,.sp-th,.sp-title,.sp-h,.sp-kpi .l,.sp-tile .l,.sp-kvgrid .l,.sp-card h3,.sp-chip,.sp-tag,.sp-sub2{font-family:var(--display);text-transform:uppercase;letter-spacing:.03em;font-weight:400}
+h1{font-size:clamp(28px,3.4vw,46px);line-height:1.06;letter-spacing:.005em;font-weight:400}
+.brand{font-size:20px;letter-spacing:.04em}
+.lede,.hero-note{letter-spacing:0}
+
+/* top bar like the landing nav: ABOUT / HOW IT WORKS / ... */
+.bar{background:var(--bg);border-bottom:1px solid var(--border)}
+.links{gap:0}
+.links a{height:36px;padding:0 10px;font-size:13px;color:var(--text);background:none!important;box-shadow:none!important;position:relative}
+.links a:hover{color:var(--accent)}
+.links a[aria-current=page]{color:var(--accent);text-decoration:underline;text-underline-offset:8px;text-decoration-thickness:2px}
+.iconbtn{background:none}
+
+/* buttons: navy, notched corners (top-left, bottom-right) */
+.btn,.walletbtn{font-size:13px;height:38px;border:1px solid var(--text);background:transparent;color:var(--text);box-shadow:none}
+.btn:hover,.walletbtn:hover{background:var(--hover);border-color:var(--text)}
+.btn.primary,.walletbtn.primary{background:var(--text);border-color:var(--text);color:#fff;box-shadow:none;clip-path:polygon(7px 0,100% 0,100% calc(100% - 7px),calc(100% - 7px) 100%,0 100%,0 7px)}
+.btn.primary:hover{background:var(--accent);border-color:var(--accent)}
+.btn.ghost{border-color:transparent;color:var(--muted)}
+.btn.lg{height:46px;font-size:14px;padding:0 24px}.btn.sm{height:32px}
+.badge,.chip{border-color:var(--border2);background:transparent}
+.badge.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+.card,.note,.strip>div{box-shadow:none;border-color:var(--border2)}
+.eyebrow{color:var(--accent);font-size:12px}
+::selection{background:var(--accent);color:#fff}
+
+/* hero: navy band, like the landing sections */
+.hero{background:var(--text);color:#fff;padding:52px 0 40px;margin-bottom:8px}
+.hero h1,.hero h2,.hero .lede,.hero b{color:#fff}
+.hero .lede,.hero .hero-note,.hero .muted{color:#b9c4dc}
+.hero .eyebrow{color:#aeb4ff}
+.hero a{color:#cfd5ff}.hero .btn.primary a{color:#fff}
+.hero .btn{border-color:rgba(255,255,255,.55);color:#fff}.hero .btn:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.hero .btn.primary{background:#fff;border-color:#fff;color:var(--text)}.hero .btn.primary:hover{background:#dfe4ff;border-color:#dfe4ff;color:var(--text)}
+.hero .chip{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.28);color:#fff}
+.hero .code{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.05)}
+.hero .code-h{color:#aeb9d4}
+.hero .strip>div{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.22)}
+.hero .strip dt{color:#aeb9d4}.hero .strip dd{color:#fff}
+
+/* tables, inputs */
+.mhead{background:var(--raised)}
+input,select,textarea,.search,input.txt{background:#fff;border-color:var(--border2);color:var(--text)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.ca-line{font:13px var(--mono);color:var(--muted);word-break:break-all}.ca-line code{font:inherit;color:var(--text)}

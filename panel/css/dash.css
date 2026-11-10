@@ -1,0 +1,58 @@
+/* Home dashboard: quick actions, KPI cards with sparkline and change chip, usage chart extras, health card, activity list, collapsible checklist. Tokens only. */
+.endpoint{margin-top:0}
+.lede .endpoint{vertical-align:middle}
+
+/* quick actions */
+.quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.qa{display:flex;align-items:center;gap:12px;min-width:0;padding:12px 14px;border:1px solid var(--border);border-radius:var(--r-card);background:var(--surface);color:var(--text);cursor:pointer;text-align:left;box-shadow:var(--shadow);transition:border-color .15s,background .15s,transform .15s}
+.qa:hover{border-color:var(--accent-bd);background:var(--raised);transform:translateY(-1px)}
+.qa>svg{width:34px;height:34px;flex:none;padding:8px;border-radius:9px;stroke:var(--accent-text);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;background:var(--accent-bg)}
+.qa span{display:flex;flex-direction:column;min-width:0}
+.qa b{font-size:13.5px;font-weight:600}
+.qa small{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* KPI cards */
+.kpi .kv-row{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;min-width:0}
+.kpi .spark{width:96px;height:30px;flex:none;overflow:visible}
+.spark .sl{fill:none;stroke:var(--accent);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+.spark .sa{fill:var(--accent-bg);stroke:none}
+.kpi .delta{display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px}
+.dl{font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.dl.gain{color:var(--ok)}.dl.loss{color:var(--bad)}.dl.flat,.dl.na{color:var(--muted)}
+.dl.na{font-weight:500}
+.delta .sub{color:var(--muted)}
+
+/* usage chart head: two segmented controls side by side */
+.card>h3 .row-flex{gap:8px}
+.hint{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+/* health */
+.hl-sum{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:14px}
+.hl-sum.ok b{color:var(--ok)}.hl-sum.warn b{color:var(--warn)}.hl-sum.bad b{color:var(--bad)}
+.hl{list-style:none}
+.hl-r{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-top:1px solid var(--border)}
+.hl-r>div{flex:1;min-width:0}
+.hl-r b{font-size:13.5px;font-weight:600}
+.hl-r p{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.hl-r .btn{flex:none}
+.hdot{display:inline-block;width:10px;height:10px;margin-top:5px;border-radius:50%;flex:none;background:var(--faint)}
+.hl-sum .hdot{margin-top:0}
+.hdot.ok{background:var(--ok);box-shadow:0 0 0 3px var(--ok-bg)}
+.hdot.warn{background:var(--warn);box-shadow:0 0 0 3px var(--warn-bg)}
+.hdot.bad{background:var(--bad);box-shadow:0 0 0 3px var(--bad-bg)}
+.hdot.idle{background:transparent;border:2px solid var(--faint)}
+
+/* recent activity (rows come from live.css) */
+.lv-list.ov-act{min-height:0;max-height:none;overflow:visible;margin:0 -20px -20px}
+.lv-list.ov-act .lv-row:last-child{border-bottom:0}
+
+/* collapsible checklist */
+.guide>summary{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;list-style:none;cursor:pointer;border-radius:8px;font-size:15px;min-height:36px}
+.guide>summary::-webkit-details-marker{display:none}
+.guide .gt{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.guide .fold-i svg{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+.guide:not([open]) .fold-i svg{transform:rotate(-90deg)}
+.guide[open]>summary{margin-bottom:14px}
+.guide .gnext{font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.guide[open] .gnext{display:none}
+#ov-chart .bars{height:210px}

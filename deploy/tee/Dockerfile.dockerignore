@@ -1,0 +1,45 @@
+# BuildKit reads "<Dockerfile name>.dockerignore" next to the Dockerfile in preference to a root .dockerignore, so
+# this file applies to `-f deploy/tee/Dockerfile` without touching the repo-root ignore rules.
+# It only shrinks the upload and keeps secrets out of the context; the Dockerfile COPY lines are explicit and
+# are the real allow-list.
+
+# secrets / identity material: never into an image
+.elyra*/
+**/.elyra*/
+**/identity.json
+**/wallet.json
+**/*.pem
+**/*.key
+.env
+.env.*
+**/.env
+**/.env.*
+
+# VCS / CI / editors
+.git
+.github
+.gitignore
+.vscode
+.idea
+
+# not part of the TEE image
+node_modules
+**/node_modules
+contracts
+!contracts/artifacts
+contracts/artifacts/*
+!contracts/artifacts/ElyraEscrow.json
+router/test
+docs
+deploy
+index.html
+wp-content
+wp-includes
+wp-json
+legal
+*.md
+PRD.md
+ROADMAP.md
+CHANGELOG.md
+start.bat
+*.log
